@@ -62,4 +62,24 @@ describe(Doctor) do
       expect(Doctor.find(test_doctor2.id())).to(eq(test_doctor2))
     end
   end
+
+  describe("#update") do
+    it("lets you update doctors in the database") do
+      doctor = Doctor.new({:id => nil, :name => "Dr.Jones", :specialty => "Pediatrics", :patient_id => 5})
+      doctor.save()
+      doctor.update({:name => "Dr.Paul"})
+      expect(doctor.name()).to(eq("Dr.Paul"))
+    end
+  end
+
+  describe("#delete") do
+    it("lets you delete doctor form the DB") do
+       doctor1 = Doctor.new({:id => nil, :name => "Dr.Jones", :specialty => "Pediatrics", :patient_id => 5})
+       doctor1.save
+       doctor2 = Doctor.new({:id => nil, :name => "Dr.Phil", :specialty => "LoudMouth", :patient_id => 3})
+       doctor2.save
+       doctor1.delete
+       expect(Doctor.all()).to(eq([doctor2]))
+     end
+   end
 end
