@@ -30,4 +30,13 @@ class Doctor
     self.name().==(another_doctor.name()).&(self.id().==(another_doctor.id()))
   end
 
+  define_singleton_method(:find) do |id|
+    found_doctor = nil
+    Doctor.all().each() do |doctor|
+      if doctor.id().==(id)
+        found_doctor = doctor
+      end
+    end
+    found_doctor
+  end
 end

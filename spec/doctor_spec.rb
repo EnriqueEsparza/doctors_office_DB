@@ -31,4 +31,35 @@ describe(Doctor) do
       expect(doctor.id()).to(be_an_instance_of(Fixnum))
     end
   end
+
+  describe("#name") do
+    it("tells you the name of the doctor") do
+      doctor = Doctor.new({:id => nil, :name => "Dr.Jones", :specialty => "Pediatrics", :patient_id => 5})
+      expect(doctor.name()).to(eq("Dr.Jones"))
+    end
+  end
+
+  describe("#specialty") do
+    it("tells you the specialty of the doctor") do
+      doctor = Doctor.new({:id => nil, :name => "Dr.Jones", :specialty => "Pediatrics", :patient_id => 5})
+      expect(doctor.specialty()).to(eq("Pediatrics"))
+    end
+  end
+
+  describe("#patient_id") do
+    it("tells you the id of the doctor's patient") do
+      doctor = Doctor.new({:id => nil, :name => "Dr.Jones", :specialty => "Pediatrics", :patient_id => 5})
+      expect(doctor.patient_id()).to(eq(5))
+    end
+  end
+
+  describe(".find") do
+    it("returns a doctor by his/her id.") do
+      test_doctor = Doctor.new({:id => nil, :name => "Dr.Jones", :specialty => "Pediatrics", :patient_id => 5})
+      test_doctor.save()
+      test_doctor2 = Doctor.new({:id => nil, :name => "Dr.Paul", :specialty => "Cardiologist", :patient_id => 3})
+      test_doctor2.save()
+      expect(Doctor.find(test_doctor2.id())).to(eq(test_doctor2))
+    end
+  end
 end
