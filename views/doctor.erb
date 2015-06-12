@@ -1,0 +1,36 @@
+<h1>Welcome to <%= @doctor.name() %>'s Page</h1>
+<h3>Specialty:<%= @doctor.specialty() %></h3>
+
+<% if @patients.any?() %>
+<form action="/doctors/<%= @doctor.id %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+
+  <% @patients.each() do |patient| %>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" id="<%= patient.id() %>" name="patient_ids[]" value="<%= patient.id() %>"><%= patient.name() %>
+    </label>
+  </div>
+  <% end %>
+
+  <button type="submit">Add patient</button>
+</form>
+<% end %>
+
+<hr>
+
+
+<% if @doctor.patients.any?() %>
+<h3>These are <%= @doctor.name() %>'s Patients:</h3>
+
+<ul>
+  <% @doctor.patients.each() do |patient| %>
+  <li><% doctor.patient_id() %><%= patient.name() %></li>
+  <% end %>
+</ul>
+
+<% else %>
+
+<p>This doctor has no patients!</p>
+
+<% end %>

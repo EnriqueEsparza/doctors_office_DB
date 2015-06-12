@@ -1,0 +1,22 @@
+<h1>Hello. You are important to most of us</h1>
+
+<p></p>
+
+
+
+<form action="/doctors" method="post">
+<label for="name">Add Doctor's Name:</label>
+<input id="name" name="name" type="text">
+<label for="specialty">Add Doctor's Specialty:</label>
+<input id="specialty" name="specialty" type="text">
+
+<button type="submit">Add doctor</button>
+</form>
+
+<p>Click on a doctor to see its patients:</p>
+
+<ul>
+  <% @doctors.each do |doctor| %>
+  <li><a href="/doctors/<%= doctor.id() %>"><%= doctor.name() %></a> Specialty:<%= doctor.specialty() %></li>
+  <% end %>
+</ul>
